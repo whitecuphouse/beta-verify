@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>커리어 얼라인먼트 리포트 — WHITE PAPER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F5F1;
+    --white: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #888;
+    --border: #e0ddd8;
+    --purple-light: #f0eef8;
+    --purple: #7a6fbf;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--cream);
+    font-family: var(--sans);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ── */
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    padding: 48px 40px 44px;
+    text-align: center;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Brand ── */
+  .brand {
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* ── Cup icon ── */
+  .cup-wrap {
+    margin: 0 auto 28px;
+    width: 56px;
+    height: 56px;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Heading ── */
+  h1 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  h1 em { font-style: italic; }
+
+  .sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  /* ── Form ── */
+  .input-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-family: var(--sans);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="email"]:focus { border-color: #aaa; }
+  input[type="email"]::placeholder { color: #bbb; }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+  }
+  button:hover { opacity: 0.85; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── Result panels ── */
+  .result {
+    display: none;
+    animation: fadeUp 0.4s ease both;
+  }
+  .result.visible { display: block; }
+
+  .result-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .result-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .result-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .coupon-box {
+    background: var(--cream);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .coupon-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: var(--serif);
+    margin-bottom: 8px;
+  }
+  .coupon-code {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .coupon-copy {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-family: var(--sans);
+    width: auto;
+    padding: 0;
+    color: var(--muted);
+  }
+  .coupon-copy:hover { opacity: 0.7; }
+
+  .cta-link {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+  }
+  .cta-link:hover { opacity: 0.85; }
+
+  .reset-btn {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    margin-top: 16px;
+    text-decoration: underline;
+    font-family: var(--sans);
+    width: auto;
+    padding: 0;
+  }
+
+  /* ── Error ── */
+  .error-msg {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 8px;
+    display: none;
+  }
+  .error-msg.visible { display: block; }
+
+  /* ── Loading spinner ── */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 32px;
+    font-size: 11px;
+    color: #ccc;
+    font-family: var(--serif);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card" id="card">
+
+    <!-- ── Input View ── -->
+    <div id="view-input">
+      <p class="brand">White Cup House</p>
+
+      <div class="cup-wrap">
+        <svg width="28" height="30" viewBox="0 0 48 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="12" width="32" height="24" rx="4" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+          <path d="M36 18 Q46 18 46 24 Q46 30 36 30" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <line x1="4" y1="40" x2="40" y2="40" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h1>커리어 얼라인먼트 리포트<br><em>WHITE PAPER</em></h1>
+      <p class="sub" style="margin-top:8px;">베타 참여 이메일로 확인하시면<br>할인 쿠폰을 드려요.</p>
+
+      <div class="input-wrap">
+        <input type="email" id="email-input" placeholder="이메일을 입력해 주세요" autocomplete="email"/>
+      </div>
+      <p class="error-msg" id="error-msg">올바른 이메일 형식을 입력해 주세요.</p>
+
+      <button id="submit-btn" onclick="handleSubmit()">확인하기</button>
+    </div>
+
+    <!-- ── Result: Reviewer ── -->
+    <div class="result" id="view-reviewer">
+      <p class="result-icon">💗</p>
+      <h2 class="result-title">베타 테스트 리뷰어<br>확인이 완료되었어요</h2>
+      <p class="result-body">
+        지난 2월 베타 테스트 참여 및 리뷰를 통해<br>
+        업그레이드에 보탬이 되는 귀한 의견 보내주셔서 감사합니다.<br>
+        덕분에 리포트가 고도화 될 수 있었어요.
+      </p>
+      <div class="coupon-box">
+        <p class="coupon-label">Coupon Code</p>
+        <p class="coupon-code" id="coupon-reviewer">—</p>
+        <button class="coupon-copy" onclick="copyCoupon('coupon-reviewer')">코드 복사하기</button>
+      </div>
+      <a href="https://whitecup.house" class="cta-link">지금 리포트 시작하기 →</a>
+      <button class="reset-btn" onclick="reset()">다른 이메일로 확인하기</button>
+    </div>
+
+    <!-- ── Result: Beta ── -->
+    <div class="result" id="view-beta">
+      <p class="result-icon">💙</p>
+      <h2 class="result-title">베타 테스트 참여<br>확인이 완료되었어요</h2>
+      <p class="result-body">
+        지난 2월 베타 테스트에 참여해 주셔서 감사합니다.<br>
+        직접 서비스를 경험해 주신 것만으로도 큰 힘이 되었어요.<br>
+        감사한 마음을 담아 할인 쿠폰을 준비했습니다.
+      </p>
+      <div class="coupon-box">
+        <p class="coupon-label">Coupon Code</p>
+        <p class="coupon-code" id="coupon-beta">—</p>
+        <button class="coupon-copy" onclick="copyCoupon('coupon-beta')">코드 복사하기</button>
+      </div>
+      <a href="https://whitecup.house" class="cta-link">지금 리포트 시작하기 →</a>
+      <button class="reset-btn" onclick="reset()">다른 이메일로 확인하기</button>
+    </div>
+
+    <!-- ── Result: New ── -->
+    <div class="result" id="view-new">
+      <p class="result-icon">🤍</p>
+      <h2 class="result-title">처음 만나는 분이시군요</h2>
+      <p class="result-body">
+        이 페이지까지 찾아와 주신 것만으로도<br>
+        충분히 반가운 인연이에요.<br>
+        부담 없이 시작해 보실 수 있도록 특별 쿠폰을 준비했습니다.
+      </p>
+      <div class="coupon-box">
+        <p class="coupon-label">Coupon Code</p>
+        <p class="coupon-code" id="coupon-new">—</p>
+        <button class="coupon-copy" onclick="copyCoupon('coupon-new')">코드 복사하기</button>
+      </div>
+      <a href="https://whitecup.house" class="cta-link">지금 리포트 시작하기 →</a>
+      <button class="reset-btn" onclick="reset()">다른 이메일로 확인하기</button>
+    </div>
+
+  </div>
+
+  <p class="footer">WHITE CUP HOUSE</p>
+</div>
+
+<script>
+  // ⚠️ Apps Script 배포 후 여기에 URL 붙여넣기
+  const API_URL = "여기에_APPS_SCRIPT_배포_URL_붙여넣기";
+
+  function handleSubmit() {
+    const input = document.getElementById("email-input");
+    const email = input.value.trim();
+    const errorMsg = document.getElementById("error-msg");
+    const btn = document.getElementById("submit-btn");
+
+    // 유효성 검사
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorMsg.classList.add("visible");
+      return;
+    }
+    errorMsg.classList.remove("visible");
+
+    // 로딩 상태
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>확인 중...';
+
+    fetch(`${API_URL}?email=${encodeURIComponent(email)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === "reviewer") {
+          document.getElementById("coupon-reviewer").textContent = data.coupon;
+          showResult("view-reviewer");
+        } else if (data.status === "beta") {
+          document.getElementById("coupon-beta").textContent = data.coupon;
+          showResult("view-beta");
+        } else if (data.status === "new") {
+          document.getElementById("coupon-new").textContent = data.coupon;
+          showResult("view-new");
+        } else {
+          errorMsg.textContent = data.message || "오류가 발생했어요.";
+          errorMsg.classList.add("visible");
+          btn.disabled = false;
+          btn.innerHTML = "확인하기";
+        }
+      })
+      .catch(() => {
+        errorMsg.textContent = "네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.";
+        errorMsg.classList.add("visible");
+        btn.disabled = false;
+        btn.innerHTML = "확인하기";
+      });
+  }
+
+  function showResult(viewId) {
+    document.getElementById("view-input").style.display = "none";
+    document.getElementById(viewId).classList.add("visible");
+  }
+
+  function reset() {
+    document.getElementById("view-input").style.display = "block";
+    document.getElementById("email-input").value = "";
+    document.getElementById("submit-btn").disabled = false;
+    document.getElementById("submit-btn").innerHTML = "확인하기";
+    ["view-reviewer", "view-beta", "view-new"].forEach(id => {
+      document.getElementById(id).classList.remove("visible");
+    });
+  }
+
+  function copyCoupon(id) {
+    const code = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = event.target;
+      btn.textContent = "복사됐어요 ✓";
+      setTimeout(() => btn.textContent = "코드 복사하기", 2000);
+    });
+  }
+
+  // 엔터키 제출
+  document.getElementById("email-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") handleSubmit();
+  });
+</script>
+</body>
+</html>
